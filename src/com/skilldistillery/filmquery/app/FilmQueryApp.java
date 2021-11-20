@@ -12,17 +12,13 @@ public class FilmQueryApp {
 
 	public static void main(String[] args) {
 		FilmQueryApp app = new FilmQueryApp();
-		app.test();
-//    app.launch();
-	}
-
-	private void test() {
-		Film film = db.findFilmById(1);
-		System.out.println(film);
+		app.launch();
 	}
 
 	private void launch() {
 		Scanner input = new Scanner(System.in);
+		
+		boolean appExit = false;
 
 		startUserInterface(input);
 
@@ -30,6 +26,17 @@ public class FilmQueryApp {
 	}
 
 	private void startUserInterface(Scanner input) {
+
+		System.out.println();
+		System.out.println("======= SEARCH MENU ======");
+		System.out.println("|                        |");
+		System.out.println("|      1. By Film ID     |");
+		System.out.println("|      2. By Keyword     |");
+		System.out.println("|         3. Exit        |");
+		System.out.println("|                        |");
+		System.out.println("==========================");
+		System.out.println();
+		System.out.print("Please select from the menu above: ");
 
 	}
 

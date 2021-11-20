@@ -1,5 +1,6 @@
 package com.skilldistillery.filmquery.entities;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +10,7 @@ public class Film {
 	private int filmId;
 	private String title;
 	private String description;
-	private LocalDate releaseYear;
+	private Date releaseYear;
 	private int languageId;
 	private int rentalPeriod;
 	private double rentalRate;
@@ -18,7 +19,7 @@ public class Film {
 	private String rating;
 	private String specialFeatures;
 
-	public Film(int filmId, String title, String description, LocalDate releaseYear, int languageId, int rentalPeriod,
+	public Film(int filmId, String title, String description, Date releaseYear, int languageId, int rentalPeriod,
 			double rentalRate, int length, double replacementCost, String rating, String specialFeatures) {
 		this.filmId = filmId;
 		this.title = title;
@@ -65,11 +66,11 @@ public class Film {
 		this.description = description;
 	}
 
-	public LocalDate getReleaseYear() {
+	public Date getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(LocalDate releaseYear) {
+	public void setReleaseYear(Date releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
