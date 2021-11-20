@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.crypto.AEADBadTagException;
+
 public class Film {
 	private List<Actor> actors;
 	private int filmId;
@@ -11,6 +13,7 @@ public class Film {
 	private String description;
 	private Date releaseYear;
 	private int languageId;
+	private String language;
 	private int rentalPeriod;
 	private double rentalRate;
 	private int length;
@@ -80,6 +83,14 @@ public class Film {
 	public void setLanguageId(int languageId) {
 		this.languageId = languageId;
 	}
+	
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	
+	public String getLanguage() {
+		return language;
+	}
 
 	public int getRentalPeriod() {
 		return rentalPeriod;
@@ -130,8 +141,13 @@ public class Film {
 	}
 
 	public void simpleString() {
-		System.out.println("Title: " + getTitle() + ", Release Year: " + getReleaseYear() + ", Rating: " + getRating()
-				+ ", Description: " + getDescription());
+		System.out.println("========================================================");
+		System.out.println("Title: " + getTitle() + 
+				"\n Release Year: " + getReleaseYear() +
+				"\n Language: " + getLanguage() +
+				"\n Rating: " + getRating()	+ 
+				"\n Description: " + getDescription());
+		System.out.println("========================================================");
 	}
 
 	@Override

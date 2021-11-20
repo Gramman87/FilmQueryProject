@@ -37,18 +37,20 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setInt(1, filmId);
 
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				film = new Film(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
 						rs.getDate("release_year"), rs.getInt("language_id"), rs.getInt("rental_duration"),
 						rs.getDouble("rental_rate"), rs.getInt("length"), rs.getDouble("replacement_cost"),
 						rs.getString("rating"), rs.getString("special_features"));
 
 				film.setActors(findActorsByFilmId(filmId));
+				film.setLanguage(findFilmLanguage(filmId));
 
-				rs.close();
-				stmt.close();
-				conn.close();
 			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
 
 		} catch (SQLException e) {
 			System.err.println(e);
@@ -56,6 +58,34 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		return film;
 
+	}
+
+	@Override
+	public String findFilmLanguage(int filmId) {
+		String language = "";
+
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+
+			String sql = "SELECT name FROM film JOIN language ON language_id = language.id WHERE film.id = ?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				language = rs.getString("name");
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+
+		return language;
 	}
 
 	@Override
@@ -100,7 +130,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setInt(1, filmId);
 
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				actors.add(new Actor(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name")));
 
 			}
@@ -143,6 +173,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		} catch (SQLException e) {
 			System.out.println(e);
+		}
+
+		for (Film film : films) {
+			film.setLanguage(findFilmLanguage(film.getFilmId()));
 		}
 
 		return films;
