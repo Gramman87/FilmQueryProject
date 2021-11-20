@@ -1,7 +1,6 @@
 package com.skilldistillery.filmquery.entities;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -130,9 +129,14 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 	}
 
+	public void simpleString() {
+		System.out.println("Title: " + getTitle() + ", Release Year: " + getReleaseYear() + ", Rating: " + getRating()
+				+ ", Description: " + getDescription());
+	}
+
 	@Override
 	public String toString() {
-		return "Film [filmId: " + filmId + ", title: " + title + ", description: " + description + ", releaseYear: "
+		return "[filmId: " + filmId + ", title: " + title + ", description: " + description + ", releaseYear: "
 				+ releaseYear + ", languageId: " + languageId + ", rentalPeriod: " + rentalPeriod + ", rentalRate: "
 				+ rentalRate + ", length: " + length + ", replacementCost: " + replacementCost + ", rating: " + rating
 				+ ", specialFeatures: " + specialFeatures + "]";

@@ -42,7 +42,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 						rs.getDate("release_year"), rs.getInt("language_id"), rs.getInt("rental_duration"),
 						rs.getDouble("rental_rate"), rs.getInt("length"), rs.getDouble("replacement_cost"),
 						rs.getString("rating"), rs.getString("special_features"));
-				
+
 				film.setActors(findActorsByFilmId(filmId));
 
 				rs.close();
@@ -75,7 +75,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				actor = new Actor(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"));
 
 			}
-			
+
 			rs.close();
 			stmt.close();
 			conn.close();
@@ -100,11 +100,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setInt(1, filmId);
 
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
+			if (rs.next()) {
 				actors.add(new Actor(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name")));
 
 			}
-			
+
 			rs.close();
 			stmt.close();
 			conn.close();
@@ -114,6 +114,38 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 
 		return actors;
+	}
+
+	@Override
+	public List<Film> keywordSearch(String keyword) {
+		List<Film> films = new ArrayList<>();
+
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+
+			String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, keyword);
+			stmt.setString(2, keyword);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				films.add(new Film(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
+						rs.getDate("release_year"), rs.getInt("language_id"), rs.getInt("rental_duration"),
+						rs.getDouble("rental_rate"), rs.getInt("length"), rs.getDouble("replacement_cost"),
+						rs.getString("rating"), rs.getString("special_features")));
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+
+		return films;
 	}
 
 }
