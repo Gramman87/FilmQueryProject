@@ -1,10 +1,9 @@
 package com.skilldistillery.filmquery.entities;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.crypto.AEADBadTagException;
 
 public class Film {
 	private List<Actor> actors;
@@ -34,18 +33,14 @@ public class Film {
 		this.replacementCost = replacementCost;
 		this.rating = rating;
 		this.specialFeatures = specialFeatures;
+		actors = new ArrayList<>();
 	}
 
-	public void printActors() {
-		if(actors.size() != 0) {
-			for (Actor actor : actors) {
-				actor.toString();
-			}
-		}
+	public List<Actor> getActors() {
+		return actors;
 	}
 
 	public void setActors(List<Actor> actors) {
-		
 		this.actors = actors;
 	}
 
@@ -88,11 +83,11 @@ public class Film {
 	public void setLanguageId(int languageId) {
 		this.languageId = languageId;
 	}
-	
+
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-	
+
 	public String getLanguage() {
 		return language;
 	}
@@ -147,11 +142,17 @@ public class Film {
 
 	public void simpleString() {
 		System.out.println("========================================================");
-		System.out.println("Title: " + getTitle() + 
-				"\n Release Year: " + getReleaseYear() +
-				"\n Language: " + getLanguage() +
-				"\n Rating: " + getRating()	+ 
-				"\n Description: " + getDescription());
+		System.out.println("Title: " + getTitle() + "\n Release Year: " + getReleaseYear() + "\n Language: "
+				+ getLanguage() + "\n Rating: " + getRating() + "\n Description: " + getDescription());
+		System.out.println("_________     _____    ____________________\n"
+						 + "\\_   ___ \\   /  _  \\  /   _____/\\__    ___/\n"
+						 + "/    \\  \\/  /  /_\\  \\ \\_____  \\   |    |   \n"
+						 + "\\     \\____/    |    \\/        \\  |    |   \n"
+						 + " \\______  /\\____|__  /_______  /  |____|   \n" 
+						 + "        \\/         \\/        \\/          ");
+		for (Actor actor : actors) {
+			actor.simpleString();
+		}
 		System.out.println("========================================================");
 	}
 

@@ -1,6 +1,5 @@
 package com.skilldistillery.filmquery.app;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,7 +53,6 @@ public class FilmQueryApp {
 					System.out.println("Sorry, no such film could be found... please try again.");
 				} else {
 					userSelection.simpleString();
-					userSelection.printActors();
 					System.out.println("========================================================");
 				}
 
@@ -76,7 +74,6 @@ public class FilmQueryApp {
 				} else {
 					for (Film film : matches) {
 						film.simpleString();
-						film.printActors();
 						System.out.println();
 					}
 				}

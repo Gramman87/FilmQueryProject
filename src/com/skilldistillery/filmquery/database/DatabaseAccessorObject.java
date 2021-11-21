@@ -46,7 +46,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setLanguage(findFilmLanguage(filmId));
 				film.setActors(findActorsByFilmId(filmId));
 
-
 			}
 
 			rs.close();
@@ -125,7 +124,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
 
-			String sql = "SELECT * FROM actor JOIN film_actor ON actor.id = actor_id JOIN film ON film_id = film.id WHERE film.id = ?";
+			String sql = "SELECT actor.id, first_name, last_name FROM actor JOIN film_actor ON actor.id = actor_id JOIN film ON film_id = film.id WHERE film.id = ?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
