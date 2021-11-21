@@ -36,11 +36,16 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 	}
 
-	public List<Actor> getActors() {
-		return actors;
+	public void printActors() {
+		if(actors.size() != 0) {
+			for (Actor actor : actors) {
+				actor.toString();
+			}
+		}
 	}
 
 	public void setActors(List<Actor> actors) {
+		
 		this.actors = actors;
 	}
 

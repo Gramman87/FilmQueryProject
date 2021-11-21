@@ -43,8 +43,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 						rs.getDouble("rental_rate"), rs.getInt("length"), rs.getDouble("replacement_cost"),
 						rs.getString("rating"), rs.getString("special_features"));
 
-				film.setActors(findActorsByFilmId(filmId));
 				film.setLanguage(findFilmLanguage(filmId));
+				film.setActors(findActorsByFilmId(filmId));
+
 
 			}
 
@@ -177,6 +178,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		for (Film film : films) {
 			film.setLanguage(findFilmLanguage(film.getFilmId()));
+			film.setActors(findActorsByFilmId(film.getFilmId()));
 		}
 
 		return films;
